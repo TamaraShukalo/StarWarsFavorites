@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useFavoriteStore} from '../store/favorites';
-import {FanCountCard} from './FanCountCard';
+import {View} from 'react-native';
+import {useFavoriteStore} from '../../store/favorites';
+import {FanCountCard} from '../FanCountCard/FanCountCard';
+import {styles} from './styles';
 
 export const FansCount = () => {
   const {favorites} = useFavoriteStore();
@@ -14,12 +15,3 @@ export const FansCount = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 24,
-    marginVertical: 15,
-    flexDirection: 'row',
-    gap: 15,
-  },
-});

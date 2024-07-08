@@ -1,12 +1,13 @@
 import React, {memo, useCallback} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {FullHeart} from '../assets/svg/FullHeart';
-import {Character} from '../store/characters';
+import {Pressable, Text, View} from 'react-native';
+import {FullHeart} from '../../assets/svg/FullHeart';
+import {Character} from '../../store/characters';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {MainStackParamList} from '../navigation/MainNavigation';
-import {Heart} from '../assets/svg/Heart';
-import {COLORS} from '../assets/constants/colors';
+import {MainStackParamList} from '../../navigation/MainNavigation';
+import {Heart} from '../../assets/svg/Heart';
+import {COLORS} from '../../constants/colors';
+import {styles} from './styles';
 
 type Props = {
   character: Character;
@@ -27,6 +28,8 @@ export const CharacterItem = memo(
       navigation.navigate('CharacterScreen', {character});
     }, [navigation, character]);
 
+    console.log('render', character.name);
+
     return (
       <View style={styles.container}>
         <Pressable onPress={handleToggleFavorite}>
@@ -46,20 +49,3 @@ export const CharacterItem = memo(
 
   (oldProps, newProps) => oldProps.isFavorite === newProps.isFavorite,
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 18,
-    borderTopWidth: 0.5,
-    borderColor: COLORS.grey,
-  },
-  icon: {
-    marginRight: 40,
-  },
-  text: {
-    color: COLORS.black,
-    fontSize: 16,
-  },
-});

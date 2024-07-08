@@ -1,8 +1,9 @@
 import React, {useCallback, useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
-import {Search} from '../assets/svg/Search';
-import {COLORS} from '../assets/constants/colors';
+import {TextInput, View} from 'react-native';
+import {Search} from '../../assets/svg/Search';
+import {COLORS} from '../../constants/colors';
 import {debounce} from 'lodash';
+import {styles} from './styles';
 
 type Props = {
   onSearch: (val: string) => void | undefined;
@@ -38,19 +39,3 @@ export const SearchInput = ({onSearch, placeholder}: Props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: COLORS.white,
-    height: 48,
-  },
-  input: {
-    flex: 1,
-    marginLeft: 10,
-    height: '100%',
-    color: COLORS.black,
-    fontSize: 16,
-  },
-});

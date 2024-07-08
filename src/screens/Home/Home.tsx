@@ -3,17 +3,16 @@ import {
   ActivityIndicator,
   FlatList,
   SafeAreaView,
-  StyleSheet,
   Text,
   View,
 } from 'react-native';
-import {COLORS} from '../assets/constants/colors';
-import {Character, useCharacterStore} from '../store/characters';
-import {CharacterItem} from '../components/CharacterItem';
-import {useFavoriteStore} from '../store/favorites';
-import {Header} from '../components/Header';
-import {FansCount} from '../components/FansCount';
-import {FlatListHeader} from '../components/FlatListHeader';
+import {Character, useCharacterStore} from '../../store/characters';
+import {CharacterItem} from '../../components/CharacterItem/CharacterItem';
+import {useFavoriteStore} from '../../store/favorites';
+import {FansCount} from '../../components/FansCount/FansCount';
+import {Header} from '../../components/Header/Header';
+import {FlatListHeader} from '../../components/FlatListHeader/FlatListHeader';
+import {styles} from './styles';
 
 export const Home = () => {
   const {data, isLoading, hasMore, fetchData} = useCharacterStore();
@@ -75,6 +74,8 @@ export const Home = () => {
     );
   }, [isLoading]);
 
+  const keyExtractor = useCallback((item: Character) => item.url, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <Header />
@@ -83,7 +84,7 @@ export const Home = () => {
         contentContainerStyle={styles.contentContainerStyle}
         data={filteredData}
         renderItem={renderItem}
-        keyExtractor={item => item.url}
+        keyExtractor={keyExtractor}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.1}
         ListFooterComponent={renderFooter}
@@ -95,35 +96,3 @@ export const Home = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  contentContainerStyle: {
-    flexGrow: 1,
-    marginHorizontal: 24,
-    paddingHorizontal: 14,
-    backgroundColor: COLORS.white,
-    borderRadius: 4,
-
-    shadowColor: COLORS.black,
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.3,
-    shadowRadius: 1,
-    elevation: 4,
-  },
-  emptyListContainer: {
-    borderTopWidth: 0.5,
-    borderTopColor: COLORS.grey,
-    paddingTop: 30,
-  },
-  emptyListText: {
-    color: COLORS.black,
-    textAlign: 'center',
-    fontSize: 16,
-  },
-  activitiIndicator: {
-    margin: 10,
-  },
-});
