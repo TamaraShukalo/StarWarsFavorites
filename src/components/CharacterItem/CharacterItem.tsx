@@ -28,8 +28,6 @@ export const CharacterItem = memo(
       navigation.navigate('CharacterScreen', {character});
     }, [navigation, character]);
 
-    console.log('render', character.name);
-
     return (
       <View style={styles.container}>
         <Pressable onPress={handleToggleFavorite}>
